@@ -1,0 +1,15 @@
+public class HelloGit {
+    public static void main(String[] args) {
+        int[] nums = {3, 7, 1, 9, 4};
+        int sum = 0;
+        int max = nums[0];
+        for (int n : nums) {
+            sum += n;
+            if (n > max) {
+                max = n;
+            }
+        }
+        System.out.println("Hello, Git!");
+        System.out.println("sum = " + sum + ", max = " + max);
+    }
+}

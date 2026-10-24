@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 class Solution
 {
-    public static void main(String args[]) throws IOException
+    public static void main(String args[] )
     {
         FastReader in = new FastReader();
         int n = in.nextInt();
@@ -61,18 +61,23 @@ class Solution
         private final byte[] buf = new byte[1 << 16];
         private int len = 0, ptr = 0;
 
-        private int read() throws IOException {
+        // 内部捕获 IOException，调用方（main）不需要写 throws
+        private int read() {
             if (ptr == len) {
-                len = in.read(buf, 0, buf.length);
+                try {
+                    len = in.read(buf, 0, buf.length);
+                } catch (IOException e) {
+                    len = -1;
+                }
                 ptr = 0;
                 if (len <= 0) return -1;
             }
             return buf[ptr++];
         }
 
-        int nextInt() throws IOException {
+        int nextInt() {
             int c = read();
-            while (c != '-' && (c < '0' || c > '9')) c = read();
+            while (c != -1 && c != '-' && (c < '0' || c > '9')) c = read();
             boolean neg = false;
             if (c == '-') { neg = true; c = read(); }
             int r = 0;
